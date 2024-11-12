@@ -1,81 +1,76 @@
 
+
+#
+# class House:
+#     name = True
+#     houses_history = []
+#     def __new__(cls, *args, **kwargs):
+#         if name not in cls.houses_history :
+#
+#             return object().__new__(cls)
+#
+#
+#     def __init__(self, houses_history, name, number_of_floors):
+#         self.args = args
+#         self.kwargs = kwargs
+#         for key, value in kwargs.items():
+#             setattr(self,key,value)
+#     #def __del__(self):
+#
+#
+#
+# houses_history =[1]
+# house = {'name': 'ЖК Эльбрус', 'number_of_floors' : 10}
+# h1 = House(*houses_history, **house)
+
+
+
+
 class House:
-    def __init__(self, name, number_of_floors):
-        self.name = name
-        self.number_of_floors = number_of_floors
+    def __new__(cls, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        return object().__new__(cls)
 
+    def __init__(self,*args, **kwargs):
+        self.args = args
+        self.kwargs = kwargs
+        for key, value in kwargs.items():
+            setattr(self,key,value)
 
-    def go_to(self,new_floor):
-        #nf = [i for i in range(1, new_floor+1)] # генератор списка для создания произвольного списка целых чисел
-        nf = list(range(1, new_floor+1))
-        if new_floor > self.number_of_floors:
-           print("Такого этажа не существует")
-        else:
-            print(*nf[:], sep="\n")
+    def __del__(self, name):
+        print(f'{self.name}  снесён, но он останется в истории')
 
-    def __len__(self):
-        return  self.number_of_floors
-
-    def __str__(self):
-       return f'Название: {self.name}, кол-во этажей: {self.number_of_floors}'
-
-
-    # def __add__(self, other):
-    #     if isinstance(other, int):  # and isinstance(other, House):#and isinstance(Houses, int)
-    #         return self.number_of_floors + other
-    #     # return  self.number_of_floors + other.number_of_floors
-    #
-    #
-    # def __radd__(self, other):
-    #     return self.number_of_floors
-    #
-    #
-    # def __iadd__(self, other):
-
-    #     return self.number_of_floors
-
-    def __add__(self, other):
-        if isinstance(other, House):
-            return self.number_of_floors + other.number_of_floors #House(self.number_of_floors + other.number_of_floors)
-
-        else:
-            return self.number_of_floors + other #House(self.number_of_floors + other)
-
-    def __radd__(self, other):
-        return self.__add__(other)
-
-h1 = House('ЖК Эльбрус', 10)
-h2 = House('ЖК Акация', 20)
-
-print(h1+10)
-print(h1)
-
-print((h1+10).number_of_floors)
-print(h1)
-
-
-# class Human:
-#     def __init__(self, name, age):
+houses_history =[1]
+house = {'name': 'ЖК Эльбрус', 'number_of_floors' : 10}
+h1 = House(*houses_history, **house)
+print(houses_history)
+print(h1.name)
+print(h1.number_of_floors)
+print(h1.args)
+print(h1.name, h1.number_of_floors)
+#del h1.name
+# class House:
 #
-#         self.name = name
-#         self.age = age
-#         self.say_info()
-#         self.birthday()
+#     houses_history = []
 #
-#     def say_info(self):
-#         print(f'Меня зовут {self.name}, мне {self.age}')
-# # без f {self.name} и {self.age} не переводятся в знаьения:"Меня зовут {self.name}, мне {self.age}"
-#
-#     def birthday(self):
-#         self.age += 1
-#         print(f'У меня день рождения, мне {self.age}')
-#         if self.age >= 25:
-#             print('Вы можете получить водительские права')
+#     def __new__(cls, *args, **kwargs):
+#         print(args)
+#         print(kwargs)
+#         return object.__new__(cls)
 #
 #
-# max = Human('Максим', 22)
-# print(max.name,max.age) #здесь будет не 22, а 23 года, поскольку мы изменили год, применив self.birthday() перед этим
-# print(max.age)
-# #max.birthday()
-# #max.birthday()
+#     def __init__(self, first, second, third):
+#         print(first)
+#         print(second)
+#         print(third)
 #
+#     def __del__(self, name):
+#          print(f'{self.name}  снесён, но он останется в истории")
+#
+#
+#
+# h1= House('date', second= 25, third = 3.14)
+# h2 = House('date', second=30, third = 40)
+# del h1
+# print(h2)
